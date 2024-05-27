@@ -153,6 +153,21 @@
       font-size: 24px;
       cursor: pointer;
     }
+
+    .copy-button {
+      display: block;
+      width: 200px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #2196F3;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      margin: 20px auto;
+    }
   </style>
 </head>
 <body>
@@ -162,6 +177,7 @@
       <input type="text" id="appUrl" placeholder="Enter Google Play Store app URL">
       <button onclick="getScreenshots()">Get Screenshots</button>
     </div>
+    <button class="copy-button" id="copyButton" style="display: none;" onclick="copyAllUrls()">Copy All URLs</button>
     <div id="output"></div>
     <div class="screenshot-preview" id="screenshotPreview">
       <span class="close-preview" onclick="closePreview()">&times;</span>
@@ -170,6 +186,8 @@
   </div>
 
   <script>
+    let screenshotUrls = [];
+
     function getScreenshots() {
       const appUrl = document.getElementById('appUrl').value;
       const appId = extractAppId(appUrl);
@@ -180,6 +198,8 @@
         fetch(url)
           .then(response => response.json())
           .then(screenshots => {
+            screenshotUrls = screenshots;
+
             const output = document.getElementById('output');
             output.innerHTML = '';
 
@@ -193,7 +213,7 @@
               imageElement.onclick = () => showPreview(url);
 
               const downloadButton = document.createElement('a');
-              downloadButton.href = `http://localhost:3000/download?url=${encodeURIComponent(url)}`;
+              downloadButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(url)}`;
               downloadButton.download = `screenshot_${index + 1}.png`;
               downloadButton.className = 'download-button';
               downloadButton.textContent = 'Download';
@@ -202,6 +222,9 @@
               screenshotElement.appendChild(downloadButton);
               output.appendChild(screenshotElement);
             });
+
+            const copyButton = document.getElementById('copyButton');
+            copyButton.style.display = 'block';
           })
           .catch(error => {
             console.error('Failed to fetch app screenshots:', error);
@@ -210,6 +233,18 @@
       } else {
         alert('Invalid Google Play Store app URL');
       }
+    }
+
+    function copyAllUrls() {
+      const urlsText = screenshotUrls.join('\n');
+      navigator.clipboard.writeText(urlsText)
+        .then(() => {
+          alert('All screenshot URLs copied to clipboard!');
+        })
+        .catch(error => {
+          console.error('Failed to copy URLs:', error);
+          alert('Failed to copy URLs');
+        });
     }
 
     function showPreview(url) {
