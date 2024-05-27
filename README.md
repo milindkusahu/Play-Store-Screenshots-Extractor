@@ -17,10 +17,9 @@ A simple web-based tool to fetch and download screenshots of Google Play Store a
 To use the Play Store App Screenshots tool, follow these steps:
 
 1. Open the tool in your web browser by visiting: [https://milindkusahu.github.io/Play-Store-Screenshots-Extractor/](https://milindkusahu.github.io/Play-Store-Screenshots-Extractor/)
-   - Replace `milindkusahu` with your GitHub username and `Play-Store-Screenshots-Extractor` with the name of your repository.
 
 2. Enter the Google Play Store app URL in the input field.
-   - Example: `https://play.google.com/store/apps/details?id=com.example.app`
+   - Example: `https://play.google.com/store/apps/details?id=com.google.android.apps.bard`
 
 3. Click on the "Get Screenshots" button to fetch the screenshots of the app.
 
