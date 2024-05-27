@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>Play Store Screenshots Downloader/ Extractor</title>
+  <meta name="description" content="Fetch and download screenshots of Google Play Store apps easily. Simply enter the app URL and get high-quality screenshots in a grid view.">
+  <link rel="apple-touch-icon" sizes="180x180" href="/favicon/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon/favicon-16x16.png">
+  <link rel="manifest" href="/favicon/site.webmanifest">
+  <link rel="mask-icon" href="/favicon/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="shortcut icon" href="/favicon/favicon.ico">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="msapplication-config" content="/favicon/browserconfig.xml">
+  <meta name="theme-color" content="#ffffff">
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      margin: 0;
+      padding: 20px;
+      background-color: #f5f5f5;
+    }
+
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+
+    .container {
+      max-width: 800px;
+      margin: 0 auto;
+      background-color: #fff;
+      padding: 20px;
+      border-radius: 5px;
+      box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    }
+
+    .input-container {
+      display: flex;
+      margin-bottom: 10px;
+    }
+
+    input[type="text"] {
+      flex: 1;
+      padding: 10px;
+      font-size: 16px;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+
+    button {
+      padding: 10px 20px;
+      font-size: 16px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      margin-left: 10px;
+    }
+
+    #output {
+      margin-top: 20px;
+    }
+
+    .screenshot {
+      display: block;
+      margin-bottom: 10px;
+      padding: 10px;
+      background-color: #f9f9f9;
+      border: 1px solid #ddd;
+      border-radius: 4px;
+      word-wrap: break-word;
+    }
+
+    .screenshot img {
+      max-width: 100%;
+      height: auto;
+      margin-top: 10px;
+    }
+
+    .download-button {
+      display: inline-block;
+      padding: 8px 12px;
+      font-size: 14px;
+      background-color: #4CAF50;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-decoration: none;
+      margin-top: 10px;
+    }
+
+    .download-all-button {
+      display: block;
+      width: 200px;
+      padding: 10px;
+      font-size: 16px;
+      background-color: #2196F3;
+      color: #fff;
+      border: none;
+      border-radius: 4px;
+      cursor: pointer;
+      text-align: center;
+      text-decoration: none;
+      margin: 20px auto;
+    }
+
+    #output {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+      grid-gap: 20px;
+    }
+
+    .screenshot {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-align: center;
+    }
+
+    .screenshot img {
+      max-width: 100%;
+      height: auto;
+      cursor: pointer;
+    }
+
+    .screenshot-preview {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background-color: rgba(0, 0, 0, 0.8);
+      display: none;
+      justify-content: center;
+      align-items: center;
+      z-index: 9999;
+    }
+
+    .screenshot-preview img {
+      max-width: 90%;
+      max-height: 90%;
+    }
+
+    .close-preview {
+      position: absolute;
+      top: 20px;
+      right: 20px;
+      color: #fff;
+      font-size: 24px;
+      cursor: pointer;
+    }
+  </style>
+</head>
+<body>
+  <div class="container">
+    <h1>Play Store App Screenshots</h1>
+    <div class="input-container">
+      <input type="text" id="appUrl" placeholder="Enter Google Play Store app URL">
+      <button onclick="getScreenshots()">Get Screenshots</button>
+    </div>
+    <div id="output"></div>
+    <div class="screenshot-preview" id="screenshotPreview">
+      <span class="close-preview" onclick="closePreview()">&times;</span>
+      <img id="previewImage">
+    </div>
+  </div>
+
+  <script>
+    function getScreenshots() {
+      const appUrl = document.getElementById('appUrl').value;
+      const appId = extractAppId(appUrl);
+
+      if (appId) {
+        const url = `http://localhost:3000/screenshots?appId=${appId}`;
+
+        fetch(url)
+          .then(response => response.json())
+          .then(screenshots => {
+            const output = document.getElementById('output');
+            output.innerHTML = '';
+
+            screenshots.forEach((url, index) => {
+              const screenshotElement = document.createElement('div');
+              screenshotElement.className = 'screenshot';
+
+              const imageElement = document.createElement('img');
+              imageElement.src = url;
+              imageElement.alt = 'Screenshot';
+              imageElement.onclick = () => showPreview(url);
+
+              const downloadButton = document.createElement('a');
+              downloadButton.href = `http://localhost:3000/download?url=${encodeURIComponent(url)}`;
+              downloadButton.download = `screenshot_${index + 1}.png`;
+              downloadButton.className = 'download-button';
+              downloadButton.textContent = 'Download';
+
+              screenshotElement.appendChild(imageElement);
+              screenshotElement.appendChild(downloadButton);
+              output.appendChild(screenshotElement);
+            });
+          })
+          .catch(error => {
+            console.error('Failed to fetch app screenshots:', error);
+            alert('Failed to fetch app screenshots');
+          });
+      } else {
+        alert('Invalid Google Play Store app URL');
+      }
+    }
+
+    function showPreview(url) {
+      const previewImage = document.getElementById('previewImage');
+      previewImage.src = url;
+
+      const screenshotPreview = document.getElementById('screenshotPreview');
+      screenshotPreview.style.display = 'flex';
+    }
+
+    function closePreview() {
+      const screenshotPreview = document.getElementById('screenshotPreview');
+      screenshotPreview.style.display = 'none';
+    }
+
+    function extractAppId(appUrl) {
+      const match = appUrl.match(/id=([a-z0-9._]+)/i);
+      return match ? match[1] : null;
+    }
+  </script>
+</body>
+</html>
