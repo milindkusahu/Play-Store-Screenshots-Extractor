@@ -65,7 +65,7 @@ The Play Store App Screenshots Extractor tool relies on the following dependenci
 
 ## Contributing
 
-Contributions to the Play Store App Screenshots tool are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the [GitHub repository](https://github.com/your-username/your-repository).
+Contributions to the Play Store App Screenshots tool are welcome! If you find any issues or have suggestions for improvements, please open an issue or submit a pull request on the [GitHub repository](https://github.com/milindkusahu/Play-Store-Screenshots-Extractor).
 
 ## License
 
