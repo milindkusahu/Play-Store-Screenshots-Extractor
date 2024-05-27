@@ -1,4 +1,6 @@
-# Play Store App Screenshots
+<img src="https://raw.githubusercontent.com/milindkusahu/Play-Store-Screenshots-Extractor/main/demo%20image.png?raw=true"></img>
+
+# Play Store App Screenshots Downloader/ Extractor
 
 A simple web-based tool to fetch and download screenshots of Google Play Store apps. Simply enter the app URL and get high-quality screenshots in a grid view.
 
@@ -35,24 +37,28 @@ The web-based frontend of the Play Store App Screenshots tool is hosted on GitHu
 To host the server component, follow these steps:
 
 1. Clone the repository:
-
+ ```bash
 git clone https://github.com/milindkusahu/Play-Store-Screenshots-Extractor.git
+```
 
 2. Install the required dependencies:
-
+```bash
 cd your-repository
 npm install
+```
 
 3. Start the server:
+```bash
 node app.mjs
+```
 
-4. Deploy the server to a hosting platform of your choice (e.g., Heroku, AWS, Google Cloud Platform).
+5. Deploy the server to a hosting platform of your choice (e.g., GitHub Pages, Heroku, AWS, Google Cloud Platform).
 
-5. Update the URLs in the `index.html` file to point to your hosted server.
+6. Update the URLs in the `index.html` file to point to your hosted server.
 
 ## Dependencies
 
-The Play Store App Screenshots tool relies on the following dependencies:
+The Play Store App Screenshots Extractor tool relies on the following dependencies:
 
 - [Express.js](https://expressjs.com/) - Web framework for Node.js
 - [google-play-scraper](https://www.npmjs.com/package/google-play-scraper) - Library to scrape data from the Google Play Store
