@@ -269,6 +269,23 @@
         text-decoration: none;
         margin: 20px auto;
       }
+
+      .toast {
+      position: fixed;
+      bottom: 20px;
+      left: 50%;
+      transform: translateX(-50%);
+      background-color: #333;
+      color: #fff;
+      padding: 10px 20px;
+      border-radius: 4px;
+      opacity: 0;
+      transition: opacity 0.3s ease-in-out;
+    }
+
+    .toast.show {
+      opacity: 1;
+    }
     </style>
   </head>
   <body>
@@ -283,39 +300,19 @@
         <button onclick="getScreenshots()">Get Screenshots</button>
       </div>
       <div class="app-name-container">
-        <div id="appName"></div>
-        <button
-          class="copy-app-name-button"
-          id="copyAppNameButton"
-          style="display: none"
-          onclick="copyAppName()"
-        >
-          Copy App Name
-        </button>
-      </div>
-      <button
-        class="copy-button"
-        id="copyButton"
-        style="display: none"
-        onclick="copyAllUrls()"
-      >
-        Copy All URLs
-      </button>
-      <a
-        href="#"
-        class="download-button"
-        id="downloadFeaturedGraphicsButton"
-        style="display: none"
-        download
-        >Download Featured Graphics</a
-      >
-      <div id="output"></div>
+      <div id="appName"></div>
+      <button class="copy-app-name-button" id="copyAppNameButton" style="display: none;" onclick="copyAppName()">Copy App Name</button>
+    </div>
+    <button class="copy-button" id="copyButton" style="display: none;" onclick="copyAllUrls()">Copy All URLs</button>
+    <a href="#" class="download-button" id="downloadFeaturedGraphicsButton" style="display: none;" download>Download Featured Graphics</a>
+    <div id="output"></div>
       <div class="screenshot-preview" id="screenshotPreview">
         <span class="close-preview" onclick="closePreview()">&times;</span>
         <img id="previewImage" />
       </div>
     </div>
-
+    <div id="toast" class="toast"></div>
+    
     <script>
       let screenshotUrls = [];
       let appName = "";
@@ -400,29 +397,36 @@
       }
 
       function copyAppName() {
-        navigator.clipboard
-          .writeText(appName)
-          .then(() => {
-            alert("App name copied to clipboard!");
-          })
-          .catch((error) => {
-            console.error("Failed to copy app name:", error);
-            alert("Failed to copy app name");
-          });
-      }
+      navigator.clipboard.writeText(appName)
+        .then(() => {
+          showToast('App name copied to clipboard!');
+        })
+        .catch(error => {
+          console.error('Failed to copy app name:', error);
+          showToast('Failed to copy app name');
+        });
+    }
 
       function copyAllUrls() {
-        const urlsText = screenshotUrls.join("\n");
-        navigator.clipboard
-          .writeText(urlsText)
-          .then(() => {
-            alert("All screenshot URLs copied to clipboard!");
-          })
-          .catch((error) => {
-            console.error("Failed to copy URLs:", error);
-            alert("Failed to copy URLs");
-          });
-      }
+      const urlsText = screenshotUrls.join('\n');
+      navigator.clipboard.writeText(urlsText)
+        .then(() => {
+          showToast('All screenshot URLs copied to clipboard!');
+        })
+        .catch(error => {
+          console.error('Failed to copy URLs:', error);
+          showToast('Failed to copy URLs');
+        });
+    }
+
+      function showToast(message) {
+      const toast = document.getElementById('toast');
+      toast.textContent = message;
+      toast.classList.add('show');
+      setTimeout(() => {
+        toast.classList.remove('show');
+      }, 3000);
+    }
 
       function showPreview(url) {
         const previewImage = document.getElementById("previewImage");
