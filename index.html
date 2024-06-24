@@ -74,218 +74,238 @@
     />
     <meta name="theme-color" content="#ffffff" />
     <style>
-      body {
-        font-family: Arial, sans-serif;
-        margin: 0;
-        padding: 20px;
-        background-color: #f5f5f5;
-      }
+        body {
+          font-family: Arial, sans-serif;
+          margin: 0;
+          padding: 20px;
+          background-color: #f5f5f5;
+        }
 
-      h1 {
-        text-align: center;
-        color: #333;
-      }
+        h1 {
+          text-align: center;
+          color: #333;
+        }
 
-      .container {
-        max-width: 800px;
-        margin: 0 auto;
-        background-color: #fff;
-        padding: 20px;
-        border-radius: 5px;
-        box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-      }
+        .container {
+          max-width: 800px;
+          margin: 0 auto;
+          background-color: #fff;
+          padding: 20px;
+          border-radius: 5px;
+          box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+        }
 
-      .input-container {
-        display: flex;
-        margin-bottom: 10px;
-      }
+        .input-container {
+          display: flex;
+          margin-bottom: 10px;
+        }
 
-      input[type="text"] {
-        flex: 1;
-        padding: 10px;
-        font-size: 16px;
-        border: 1px solid #ccc;
-        border-radius: 4px;
-      }
+        input[type="text"] {
+          flex: 1;
+          padding: 10px;
+          font-size: 16px;
+          border: 1px solid #ccc;
+          border-radius: 4px;
+        }
 
-      button {
-        padding: 10px 20px;
-        font-size: 16px;
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        margin-left: 10px;
-      }
+        button {
+          padding: 10px 20px;
+          font-size: 16px;
+          background-color: #4caf50;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          margin-left: 10px;
+        }
 
-      #output {
-        margin-top: 20px;
-      }
+        #output {
+          margin-top: 20px;
+        }
 
-      .screenshot {
-        display: block;
-        margin-bottom: 10px;
-        padding: 10px;
-        background-color: #f9f9f9;
-        border: 1px solid #ddd;
-        border-radius: 4px;
-        word-wrap: break-word;
-      }
+        .screenshot {
+          display: block;
+          margin-bottom: 10px;
+          padding: 10px;
+          background-color: #f9f9f9;
+          border: 1px solid #ddd;
+          border-radius: 4px;
+          word-wrap: break-word;
+        }
 
-      .screenshot img {
-        max-width: 100%;
-        height: auto;
-        margin-top: 10px;
-      }
+        .screenshot img {
+          max-width: 100%;
+          height: auto;
+          margin-top: 10px;
+        }
 
-      .download-button {
-        display: inline-block;
-        padding: 8px 12px;
-        font-size: 14px;
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        text-decoration: none;
-        margin-top: 10px;
-      }
+        .download-button {
+          display: inline-block;
+          padding: 8px 12px;
+          font-size: 14px;
+          background-color: #4caf50;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          text-decoration: none;
+          margin-top: 10px;
+        }
 
-      .download-all-button {
-        display: block;
-        width: 200px;
-        padding: 10px;
-        font-size: 16px;
-        background-color: #2196f3;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        margin: 20px auto;
-      }
+        .download-all-button {
+          display: block;
+          width: 200px;
+          padding: 10px;
+          font-size: 16px;
+          background-color: #2196f3;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          margin: 20px auto;
+        }
 
-      #output {
-        display: grid;
-        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-        grid-gap: 20px;
-      }
+        #output {
+          display: grid;
+          grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+          grid-gap: 20px;
+        }
 
-      .screenshot {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        text-align: center;
-      }
+        .screenshot {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+          text-align: center;
+        }
 
-      .screenshot img {
-        max-width: 100%;
-        height: auto;
-        cursor: pointer;
-      }
+        .screenshot img {
+          max-width: 100%;
+          height: auto;
+          cursor: pointer;
+        }
 
-      .screenshot-preview {
+        .screenshot-preview {
+          position: fixed;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.8);
+          display: none;
+          justify-content: center;
+          align-items: center;
+          z-index: 9999;
+        }
+
+        .screenshot-preview img {
+          max-width: 90%;
+          max-height: 90%;
+        }
+
+        .close-preview {
+          position: absolute;
+          top: 20px;
+          right: 20px;
+          color: #fff;
+          font-size: 24px;
+          cursor: pointer;
+        }
+
+        .copy-button {
+          display: block;
+          width: 200px;
+          padding: 10px;
+          font-size: 16px;
+          background-color: #2196f3;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          margin: 20px auto;
+        }
+
+        #appName {
+          text-align: center;
+          margin-top: 20px;
+          font-size: 18px;
+          font-weight: bold;
+        }
+
+        .copy-app-name-button {
+          display: inline-block;
+          padding: 5px 10px;
+          font-size: 14px;
+          background-color: #2196f3;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          margin-top: 10px;
+        }
+
+        .app-name-container {
+          display: flex;
+          flex-direction: column;
+          align-items: center;
+        }
+
+        .download-button {
+          display: block;
+          width: 200px;
+          padding: 10px;
+          font-size: 16px;
+          background-color: #4caf50;
+          color: #fff;
+          border: none;
+          border-radius: 4px;
+          cursor: pointer;
+          text-align: center;
+          text-decoration: none;
+          margin: 20px auto;
+        }
+
+        .toast {
         position: fixed;
-        top: 0;
-        left: 0;
-        width: 100%;
-        height: 100%;
-        background-color: rgba(0, 0, 0, 0.8);
-        display: none;
-        justify-content: center;
-        align-items: center;
-        z-index: 9999;
-      }
-
-      .screenshot-preview img {
-        max-width: 90%;
-        max-height: 90%;
-      }
-
-      .close-preview {
-        position: absolute;
-        top: 20px;
-        right: 20px;
+        bottom: 20px;
+        left: 50%;
+        transform: translateX(-50%);
+        background-color: #333;
         color: #fff;
-        font-size: 24px;
-        cursor: pointer;
-      }
-
-      .copy-button {
-        display: block;
-        width: 200px;
-        padding: 10px;
-        font-size: 16px;
-        background-color: #2196f3;
-        color: #fff;
-        border: none;
+        padding: 10px 20px;
         border-radius: 4px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        margin: 20px auto;
+        opacity: 0;
+        transition: opacity 0.3s ease-in-out;
       }
 
-      #appName {
-        text-align: center;
-        margin-top: 20px;
-        font-size: 18px;
-        font-weight: bold;
+      .toast.show {
+        opacity: 1;
       }
 
-      .copy-app-name-button {
+      .app-logo {
+        max-width: 100px;
+        max-height: 100px;
+        margin-top: 10px;
+      }
+
+      .download-logo-button {
         display: inline-block;
         padding: 5px 10px;
         font-size: 14px;
-        background-color: #2196f3;
+        background-color: #4CAF50;
         color: #fff;
         border: none;
         border-radius: 4px;
         cursor: pointer;
         text-align: center;
         text-decoration: none;
-        margin-top: 10px;
+        margin-left: 10px;
       }
-
-      .app-name-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-      }
-
-      .download-button {
-        display: block;
-        width: 200px;
-        padding: 10px;
-        font-size: 16px;
-        background-color: #4caf50;
-        color: #fff;
-        border: none;
-        border-radius: 4px;
-        cursor: pointer;
-        text-align: center;
-        text-decoration: none;
-        margin: 20px auto;
-      }
-
-      .toast {
-      position: fixed;
-      bottom: 20px;
-      left: 50%;
-      transform: translateX(-50%);
-      background-color: #333;
-      color: #fff;
-      padding: 10px 20px;
-      border-radius: 4px;
-      opacity: 0;
-      transition: opacity 0.3s ease-in-out;
-    }
-
-    .toast.show {
-      opacity: 1;
-    }
     </style>
   </head>
   <body>
@@ -300,151 +320,191 @@
         <button onclick="getScreenshots()">Get Screenshots</button>
       </div>
       <div class="app-name-container">
-      <div id="appName"></div>
-      <button class="copy-app-name-button" id="copyAppNameButton" style="display: none;" onclick="copyAppName()">Copy App Name</button>
-    </div>
-    <button class="copy-button" id="copyButton" style="display: none;" onclick="copyAllUrls()">Copy All URLs</button>
-    <a href="#" class="download-button" id="downloadFeaturedGraphicsButton" style="display: none;" download>Download Featured Graphics</a>
-    <div id="output"></div>
+        <div id="appName"></div>
+        <img id="appLogo" class="app-logo" style="display: none;" />
+        <button
+          class="copy-app-name-button"
+          id="copyAppNameButton"
+          style="display: none;"
+          onclick="copyAppName()"
+        >
+          Copy App Name
+        </button>
+        <a
+          href="#"
+          class="download-logo-button"
+          id="downloadLogoButton"
+          style="display: none;"
+          download
+          >Download Logo</a
+        >
+      </div>
+      <button
+        class="copy-button"
+        id="copyButton"
+        style="display: none;"
+        onclick="copyAllUrls()"
+      >
+        Copy All URLs
+      </button>
+      <a
+        href="#"
+        class="download-button"
+        id="downloadFeaturedGraphicsButton"
+        style="display: none;"
+        download
+        >Download Featured Graphics</a
+      >
+      <div id="output"></div>
       <div class="screenshot-preview" id="screenshotPreview">
         <span class="close-preview" onclick="closePreview()">&times;</span>
         <img id="previewImage" />
       </div>
     </div>
     <div id="toast" class="toast"></div>
-    
+
     <script>
-      let screenshotUrls = [];
-      let appName = "";
+        let screenshotUrls = [];
+        let appName = "";
 
-      function getScreenshots() {
-        const appUrl = document.getElementById("appUrl").value;
-        const appId = extractAppId(appUrl);
+        function getScreenshots() {
+          const appUrl = document.getElementById("appUrl").value;
+          const appId = extractAppId(appUrl);
 
-        if (appId) {
-          const url = `https://play-store-screenshots.onrender.com/app-details?appId=${appId}`;
+          if (appId) {
+            const url = `https://play-store-screenshots.onrender.com/app-details?appId=${appId}`;
 
-          fetch(url)
-            .then((response) => response.json())
-            .then((data) => {
-              appName = data.appName;
-              const screenshots = data.screenshots;
-              const featuredGraphicsUrl = data.featuredGraphicsUrl;
+            fetch(url)
+              .then((response) => response.json())
+              .then((data) => {
+                appName = data.appName;
+                const screenshots = data.screenshots;
+                const featuredGraphicsUrl = data.featuredGraphicsUrl;
+                const logoUrl = data.logoUrl;
 
-              screenshotUrls = screenshots;
+                screenshotUrls = screenshots;
 
-              const appNameElement = document.getElementById("appName");
-              appNameElement.textContent = appName;
+                const appLogo = document.getElementById('appLogo');
+                appLogo.src = logoUrl;
+                appLogo.style.display = 'inline-block';
 
-              const copyAppNameButton =
-                document.getElementById("copyAppNameButton");
-              copyAppNameButton.style.display = "inline-block";
+                const downloadLogoButton = document.getElementById('downloadLogoButton');
+                downloadLogoButton.style.display = 'inline-block';
+                downloadLogoButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(logoUrl)}`;
+                downloadLogoButton.download = `${appId}_logo.png`;
 
-              const output = document.getElementById("output");
-              output.innerHTML = "";
+                const appNameElement = document.getElementById("appName");
+                appNameElement.textContent = appName;
 
-              screenshots.forEach((url, index) => {
-                const screenshotElement = document.createElement("div");
-                screenshotElement.className = "screenshot";
+                const copyAppNameButton =
+                  document.getElementById("copyAppNameButton");
+                copyAppNameButton.style.display = "inline-block";
 
-                const imageElement = document.createElement("img");
-                imageElement.src = url;
-                imageElement.alt = "Screenshot";
-                imageElement.onclick = () => showPreview(url);
+                const output = document.getElementById("output");
+                output.innerHTML = "";
 
-                const downloadButton = document.createElement("a");
-                downloadButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
-                  url
+                screenshots.forEach((url, index) => {
+                  const screenshotElement = document.createElement("div");
+                  screenshotElement.className = "screenshot";
+
+                  const imageElement = document.createElement("img");
+                  imageElement.src = url;
+                  imageElement.alt = "Screenshot";
+                  imageElement.onclick = () => showPreview(url);
+
+                  const downloadButton = document.createElement("a");
+                  downloadButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
+                    url
+                  )}`;
+                  downloadButton.download = `screenshot_${index + 1}.png`;
+                  downloadButton.className = "download-button";
+                  downloadButton.textContent = "Download";
+
+                  screenshotElement.appendChild(imageElement);
+                  screenshotElement.appendChild(downloadButton);
+                  output.appendChild(screenshotElement);
+                });
+
+                const copyButton = document.getElementById("copyButton");
+                copyButton.style.display = "block";
+                const downloadFeaturedGraphicsButton = document.getElementById(
+                  "downloadFeaturedGraphicsButton"
+                );
+                downloadFeaturedGraphicsButton.style.display = "block";
+                downloadFeaturedGraphicsButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
+                  featuredGraphicsUrl
                 )}`;
-                downloadButton.download = `screenshot_${index + 1}.png`;
-                downloadButton.className = "download-button";
-                downloadButton.textContent = "Download";
-
-                screenshotElement.appendChild(imageElement);
-                screenshotElement.appendChild(downloadButton);
-                output.appendChild(screenshotElement);
+                downloadFeaturedGraphicsButton.download = `${appId}_featured_graphics.png`;
+              })
+              .catch((error) => {
+                console.error("Failed to fetch app details:", error);
+                alert("Failed to fetch app details");
               });
-
-              const copyButton = document.getElementById("copyButton");
-              copyButton.style.display = "block";
-              const downloadFeaturedGraphicsButton = document.getElementById(
-                "downloadFeaturedGraphicsButton"
-              );
-              downloadFeaturedGraphicsButton.style.display = "block";
-              downloadFeaturedGraphicsButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
-                featuredGraphicsUrl
-              )}`;
-              downloadFeaturedGraphicsButton.download = `${appId}_featured_graphics.png`;
-            })
-            .catch((error) => {
-              console.error("Failed to fetch app details:", error);
-              alert("Failed to fetch app details");
-            });
-        } else {
-          alert("Invalid Google Play Store app URL");
+          } else {
+            alert("Invalid Google Play Store app URL");
+          }
         }
+
+        function downloadFeaturedGraphics() {
+          const featuredGraphicsUrl = document
+            .getElementById("downloadFeaturedGraphicsButton")
+            .getAttribute("data-url");
+          window.open(
+            `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
+              featuredGraphicsUrl
+            )}`
+          );
+        }
+
+        function copyAppName() {
+        navigator.clipboard.writeText(appName)
+          .then(() => {
+            showToast('App name copied to clipboard!');
+          })
+          .catch(error => {
+            console.error('Failed to copy app name:', error);
+            showToast('Failed to copy app name');
+          });
       }
 
-      function downloadFeaturedGraphics() {
-        const featuredGraphicsUrl = document
-          .getElementById("downloadFeaturedGraphicsButton")
-          .getAttribute("data-url");
-        window.open(
-          `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
-            featuredGraphicsUrl
-          )}`
-        );
+        function copyAllUrls() {
+        const urlsText = screenshotUrls.join('\n');
+        navigator.clipboard.writeText(urlsText)
+          .then(() => {
+            showToast('All screenshot URLs copied to clipboard!');
+          })
+          .catch(error => {
+            console.error('Failed to copy URLs:', error);
+            showToast('Failed to copy URLs');
+          });
       }
 
-      function copyAppName() {
-      navigator.clipboard.writeText(appName)
-        .then(() => {
-          showToast('App name copied to clipboard!');
-        })
-        .catch(error => {
-          console.error('Failed to copy app name:', error);
-          showToast('Failed to copy app name');
-        });
-    }
-
-      function copyAllUrls() {
-      const urlsText = screenshotUrls.join('\n');
-      navigator.clipboard.writeText(urlsText)
-        .then(() => {
-          showToast('All screenshot URLs copied to clipboard!');
-        })
-        .catch(error => {
-          console.error('Failed to copy URLs:', error);
-          showToast('Failed to copy URLs');
-        });
-    }
-
-      function showToast(message) {
-      const toast = document.getElementById('toast');
-      toast.textContent = message;
-      toast.classList.add('show');
-      setTimeout(() => {
-        toast.classList.remove('show');
-      }, 3000);
-    }
-
-      function showPreview(url) {
-        const previewImage = document.getElementById("previewImage");
-        previewImage.src = url;
-
-        const screenshotPreview = document.getElementById("screenshotPreview");
-        screenshotPreview.style.display = "flex";
+        function showToast(message) {
+        const toast = document.getElementById('toast');
+        toast.textContent = message;
+        toast.classList.add('show');
+        setTimeout(() => {
+          toast.classList.remove('show');
+        }, 3000);
       }
 
-      function closePreview() {
-        const screenshotPreview = document.getElementById("screenshotPreview");
-        screenshotPreview.style.display = "none";
-      }
+        function showPreview(url) {
+          const previewImage = document.getElementById("previewImage");
+          previewImage.src = url;
 
-      function extractAppId(appUrl) {
-        const match = appUrl.match(/id=([a-z0-9._]+)/i);
-        return match ? match[1] : null;
-      }
+          const screenshotPreview = document.getElementById("screenshotPreview");
+          screenshotPreview.style.display = "flex";
+        }
+
+        function closePreview() {
+          const screenshotPreview = document.getElementById("screenshotPreview");
+          screenshotPreview.style.display = "none";
+        }
+
+        function extractAppId(appUrl) {
+          const match = appUrl.match(/id=([a-z0-9._]+)/i);
+          return match ? match[1] : null;
+        }
     </script>
   </body>
 </html>

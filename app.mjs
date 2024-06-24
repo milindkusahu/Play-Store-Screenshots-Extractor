@@ -34,8 +34,9 @@ app.get("/app-details", async (req, res) => {
       (url) => `${url}=w2560-h1440-rw`
     );
     const featuredGraphicsUrl = `${appDetails.headerImage}=w2560-h1440-rw`;
+    const logoUrl = `${appDetails.icon}=w512-h512-rw`;
 
-    res.json({ appName, screenshots, featuredGraphicsUrl });
+    res.json({ appName, screenshots, featuredGraphicsUrl, logoUrl });
   } catch (error) {
     console.error("Failed to fetch app details:", error);
     res.status(500).json({ error: "Failed to fetch app details" });
