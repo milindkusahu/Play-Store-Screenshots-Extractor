@@ -386,147 +386,161 @@
     <div id="toast" class="toast"></div>
 
     <script>
-        let screenshotUrls = [];
-        let appName = "";
+              let screenshotUrls = [];
+              let appName = "";
 
-        function getScreenshots() {
-          const appUrl = document.getElementById("appUrl").value;
-          const appId = extractAppId(appUrl);
+              function getScreenshots() {
+                const appUrl = document.getElementById("appUrl").value;
+                const appId = extractAppId(appUrl);
 
-          if (appId) {
-            const url = `https://play-store-screenshots.onrender.com/app-details?appId=${appId}`;
+                if (appId) {
+                  const url = `https://play-store-screenshots.onrender.com/app-details?appId=${appId}`;
 
-            fetch(url)
-              .then((response) => response.json())
-              .then((data) => {
-                appName = data.appName;
-                const screenshots = data.screenshots;
-                const featuredGraphicsUrl = data.featuredGraphicsUrl;
-                const logoUrl = data.logoUrl;
+                  fetch(url)
+                    .then((response) => response.json())
+                    .then((data) => {
+                      appName = data.appName;
+                      const screenshots = data.screenshots;
+                      const featuredGraphicsUrl = data.featuredGraphicsUrl;
+                      const logoUrl = data.logoUrl;
 
-                screenshotUrls = screenshots;
+                      screenshotUrls = screenshots;
 
-                const appLogo = document.getElementById('appLogo');
-                appLogo.src = logoUrl;
-                appLogo.style.display = 'inline-block';
+                      const appNameElement = document.getElementById("appName");
+                      appNameElement.textContent = appName;
 
-                const downloadLogoButton = document.getElementById('downloadLogoButton');
-                downloadLogoButton.style.display = 'inline-block';
-                downloadLogoButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(logoUrl)}`;
-                downloadLogoButton.download = `${appId}_logo.png`;
+                      const copyAppNameButton =
+                        document.getElementById("copyAppNameButton");
+                      copyAppNameButton.style.display = "inline-block";
 
-                const appNameElement = document.getElementById("appName");
-                appNameElement.textContent = appName;
+                      const appLogo = document.getElementById('appLogo');
+                      appLogo.src = logoUrl;
+                      appLogo.style.display = 'inline-block';
 
-                const copyAppNameButton =
-                  document.getElementById("copyAppNameButton");
-                copyAppNameButton.style.display = "inline-block";
+                      const downloadLogoButton = document.getElementById('downloadLogoButton');
+                      downloadLogoButton.style.display = 'inline-block';
+                      downloadLogoButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(logoUrl)}`;
+                      downloadLogoButton.download = `${appId}_logo.png`;
 
-                const output = document.getElementById("output");
-                output.innerHTML = "";
+                      const copyLogoUrlButton = document.getElementById('copyLogoUrlButton');
+                      copyLogoUrlButton.style.display = 'inline-block';
 
-                screenshots.forEach((url, index) => {
-                  const screenshotElement = document.createElement("div");
-                  screenshotElement.className = "screenshot";
+                      const output = document.getElementById("output");
+                      output.innerHTML = "";
 
-                  const imageElement = document.createElement("img");
-                  imageElement.src = url;
-                  imageElement.alt = "Screenshot";
-                  imageElement.onclick = () => showPreview(url);
+                      screenshots.forEach((url, index) => {
+                        const screenshotElement = document.createElement("div");
+                        screenshotElement.className = "screenshot";
 
-                  const downloadButton = document.createElement("a");
-                  downloadButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
-                    url
-                  )}`;
-                  downloadButton.download = `screenshot_${index + 1}.png`;
-                  downloadButton.className = "download-button";
-                  downloadButton.textContent = "Download";
+                        const imageElement = document.createElement("img");
+                        imageElement.src = url;
+                        imageElement.alt = "Screenshot";
+                        imageElement.onclick = () => showPreview(url);
 
-                  screenshotElement.appendChild(imageElement);
-                  screenshotElement.appendChild(downloadButton);
-                  output.appendChild(screenshotElement);
-                });
+                        const downloadButton = document.createElement("a");
+                        downloadButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
+                          url
+                        )}`;
+                        downloadButton.download = `screenshot_${index + 1}.png`;
+                        downloadButton.className = "download-button";
+                        downloadButton.textContent = "Download";
 
-                const copyButton = document.getElementById("copyButton");
-                copyButton.style.display = "block";
-                const downloadFeaturedGraphicsButton = document.getElementById(
-                  "downloadFeaturedGraphicsButton"
+                        screenshotElement.appendChild(imageElement);
+                        screenshotElement.appendChild(downloadButton);
+                        output.appendChild(screenshotElement);
+                      });
+
+                      const copyButton = document.getElementById("copyButton");
+                      copyButton.style.display = "block";
+                      const downloadFeaturedGraphicsButton = document.getElementById(
+                        "downloadFeaturedGraphicsButton"
+                      );
+                      downloadFeaturedGraphicsButton.style.display = "block";
+                      downloadFeaturedGraphicsButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
+                        featuredGraphicsUrl
+                      )}`;
+                      downloadFeaturedGraphicsButton.download = `${appId}_featured_graphics.png`;
+                    })
+                    .catch((error) => {
+                      console.error("Failed to fetch app details:", error);
+                      alert("Failed to fetch app details");
+                    });
+                } else {
+                  alert("Invalid Google Play Store app URL");
+                }
+              }
+
+              function downloadFeaturedGraphics() {
+                const featuredGraphicsUrl = document
+                  .getElementById("downloadFeaturedGraphicsButton")
+                  .getAttribute("data-url");
+                window.open(
+                  `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
+                    featuredGraphicsUrl
+                  )}`
                 );
-                downloadFeaturedGraphicsButton.style.display = "block";
-                downloadFeaturedGraphicsButton.href = `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
-                  featuredGraphicsUrl
-                )}`;
-                downloadFeaturedGraphicsButton.download = `${appId}_featured_graphics.png`;
+              }
+
+              function copyAppName() {
+              navigator.clipboard.writeText(appName)
+                .then(() => {
+                  showToast('App name copied to clipboard!');
+                })
+                .catch(error => {
+                  console.error('Failed to copy app name:', error);
+                  showToast('Failed to copy app name');
+                });
+            }
+
+              function copyAllUrls() {
+              const urlsText = screenshotUrls.join('\n');
+              navigator.clipboard.writeText(urlsText)
+                .then(() => {
+                  showToast('All screenshot URLs copied to clipboard!');
+                })
+                .catch(error => {
+                  console.error('Failed to copy URLs:', error);
+                  showToast('Failed to copy URLs');
+                });
+            }
+
+              function showToast(message) {
+              const toast = document.getElementById('toast');
+              toast.textContent = message;
+              toast.classList.add('show');
+              setTimeout(() => {
+                toast.classList.remove('show');
+              }, 3000);
+            }
+
+            function copyLogoUrl() {
+          navigator.clipboard.writeText(logoUrl)
+              .then(() => {
+                  showToast('Logo URL copied to clipboard!');
               })
-              .catch((error) => {
-                console.error("Failed to fetch app details:", error);
-                alert("Failed to fetch app details");
+              .catch(error => {
+                  console.error('Failed to copy logo URL:', error);
+                  showToast('Failed to copy logo URL');
               });
-          } else {
-            alert("Invalid Google Play Store app URL");
-          }
-        }
-
-        function downloadFeaturedGraphics() {
-          const featuredGraphicsUrl = document
-            .getElementById("downloadFeaturedGraphicsButton")
-            .getAttribute("data-url");
-          window.open(
-            `https://play-store-screenshots.onrender.com/download?url=${encodeURIComponent(
-              featuredGraphicsUrl
-            )}`
-          );
-        }
-
-        function copyAppName() {
-        navigator.clipboard.writeText(appName)
-          .then(() => {
-            showToast('App name copied to clipboard!');
-          })
-          .catch(error => {
-            console.error('Failed to copy app name:', error);
-            showToast('Failed to copy app name');
-          });
       }
 
-        function copyAllUrls() {
-        const urlsText = screenshotUrls.join('\n');
-        navigator.clipboard.writeText(urlsText)
-          .then(() => {
-            showToast('All screenshot URLs copied to clipboard!');
-          })
-          .catch(error => {
-            console.error('Failed to copy URLs:', error);
-            showToast('Failed to copy URLs');
-          });
-      }
+              function showPreview(url) {
+                const previewImage = document.getElementById("previewImage");
+                previewImage.src = url;
 
-        function showToast(message) {
-        const toast = document.getElementById('toast');
-        toast.textContent = message;
-        toast.classList.add('show');
-        setTimeout(() => {
-          toast.classList.remove('show');
-        }, 3000);
-      }
+                const screenshotPreview = document.getElementById("screenshotPreview");
+                screenshotPreview.style.display = "flex";
+              }
 
-        function showPreview(url) {
-          const previewImage = document.getElementById("previewImage");
-          previewImage.src = url;
+              function closePreview() {
+                const screenshotPreview = document.getElementById("screenshotPreview");
+                screenshotPreview.style.display = "none";
+              }
 
-          const screenshotPreview = document.getElementById("screenshotPreview");
-          screenshotPreview.style.display = "flex";
-        }
-
-        function closePreview() {
-          const screenshotPreview = document.getElementById("screenshotPreview");
-          screenshotPreview.style.display = "none";
-        }
-
-        function extractAppId(appUrl) {
-          const match = appUrl.match(/id=([a-z0-9._]+)/i);
-          return match ? match[1] : null;
-        }
+              function extractAppId(appUrl) {
+                const match = appUrl.match(/id=([a-z0-9._]+)/i);
+                return match ? match[1] : null;
+              }
     </script>
   </body>
 </html>
