@@ -74,263 +74,266 @@
     />
     <meta name="theme-color" content="#ffffff" />
     <style>
-          body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 20px;
-            background-color: #f5f5f5;
-          }
+                body {
+                  font-family: Arial, sans-serif;
+                  margin: 0;
+                  padding: 20px;
+                  background-color: #f5f5f5;
+                }
 
-          h1 {
-            text-align: center;
-            color: #333;
-          }
+                h1 {
+                  text-align: center;
+                  color: #333;
+                }
 
-          .container {
-            max-width: 800px;
-            margin: 0 auto;
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 5px;
-            box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-          }
+                .container {
+                  max-width: 800px;
+                  margin: 0 auto;
+                  background-color: #fff;
+                  padding: 20px;
+                  border-radius: 5px;
+                  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+                }
 
-          .input-container {
-            display: flex;
-            margin-bottom: 10px;
-          }
+                .input-container {
+                  display: flex;
+                  margin-bottom: 10px;
+                }
 
-          input[type="text"] {
-            flex: 1;
-            padding: 10px;
-            font-size: 16px;
-            border: 1px solid #ccc;
-            border-radius: 4px;
-          }
+                input[type="text"] {
+                  flex: 1;
+                  padding: 10px;
+                  font-size: 16px;
+                  border: 1px solid #ccc;
+                  border-radius: 4px;
+                }
 
-          button {
-            padding: 10px 20px;
-            font-size: 16px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            margin-left: 10px;
-          }
+                button {
+                  padding: 10px 20px;
+                  font-size: 16px;
+                  background-color: #4caf50;
+                  color: #fff;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  margin-left: 10px;
+                }
 
-          #output {
-            margin-top: 20px;
-          }
+                #output {
+                  margin-top: 20px;
+                }
 
-          .screenshot {
-            display: block;
-            margin-bottom: 10px;
-            padding: 10px;
-            background-color: #f9f9f9;
-            border: 1px solid #ddd;
-            border-radius: 4px;
-            word-wrap: break-word;
-          }
+                .screenshot {
+                  display: block;
+                  margin-bottom: 10px;
+                  padding: 10px;
+                  background-color: #f9f9f9;
+                  border: 1px solid #ddd;
+                  border-radius: 4px;
+                  word-wrap: break-word;
+                }
 
-          .screenshot img {
-            max-width: 100%;
-            height: auto;
-            margin-top: 10px;
-          }
+                .screenshot img {
+                  max-width: 100%;
+                  height: auto;
+                  margin-top: 10px;
+                }
 
-          .download-button {
-            display: inline-block;
-            padding: 8px 12px;
-            font-size: 14px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-decoration: none;
-            margin-top: 10px;
-          }
+                .download-button {
+                  display: inline-block;
+                  padding: 8px 12px;
+                  font-size: 14px;
+                  background-color: #4caf50;
+                  color: #fff;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  text-decoration: none;
+                  margin-top: 10px;
+                }
 
-          .download-all-button {
-            display: block;
-            width: 200px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #2196f3;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            margin: 20px auto;
-          }
+                .download-all-button {
+                  display: block;
+                  width: 200px;
+                  padding: 10px;
+                  font-size: 16px;
+                  background-color: #2196f3;
+                  color: #fff;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  text-align: center;
+                  text-decoration: none;
+                  margin: 20px auto;
+                }
 
-          #output {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            grid-gap: 20px;
-          }
+                #output {
+                  display: grid;
+                  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+                  grid-gap: 20px;
+                }
 
-          .screenshot {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-            text-align: center;
-          }
+                .screenshot {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                  text-align: center;
+                }
 
-          .screenshot img {
-            max-width: 100%;
-            height: auto;
-            cursor: pointer;
-          }
+                .screenshot img {
+                  max-width: 100%;
+                  height: auto;
+                  cursor: pointer;
+                }
 
-          .screenshot-preview {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background-color: rgba(0, 0, 0, 0.8);
-            display: none;
-            justify-content: center;
-            align-items: center;
-            z-index: 9999;
-          }
+                .screenshot-preview {
+                  position: fixed;
+                  top: 0;
+                  left: 0;
+                  width: 100%;
+                  height: 100%;
+                  background-color: rgba(0, 0, 0, 0.8);
+                  display: none;
+                  justify-content: center;
+                  align-items: center;
+                  z-index: 9999;
+                }
 
-          .screenshot-preview img {
-            max-width: 90%;
-            max-height: 90%;
-          }
+                .screenshot-preview img {
+                  max-width: 90%;
+                  max-height: 90%;
+                }
 
-          .close-preview {
-            position: absolute;
-            top: 20px;
-            right: 20px;
-            color: #fff;
-            font-size: 24px;
-            cursor: pointer;
-          }
+                .close-preview {
+                  position: absolute;
+                  top: 20px;
+                  right: 20px;
+                  color: #fff;
+                  font-size: 24px;
+                  cursor: pointer;
+                }
 
-          .copy-button {
-            display: block;
-            width: 200px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #2196f3;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            margin: 20px auto;
-          }
+                .copy-button {
+                  display: block;
+                  width: 200px;
+                  padding: 10px;
+                  font-size: 16px;
+                  background-color: #2196f3;
+                  color: #fff;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  text-align: center;
+                  text-decoration: none;
+                  margin: 20px auto;
+                }
 
-          #appName {
-            text-align: center;
-            margin-top: 20px;
-            font-size: 18px;
-            font-weight: bold;
-          }
+                #appName {
+                  text-align: center;
+                  margin-top: 20px;
+                  font-size: 18px;
+                  font-weight: bold;
+                }
 
-          .copy-app-name-button {
-            display: inline-block;
-            padding: 5px 10px;
-            font-size: 14px;
-            background-color: #2196f3;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            margin-top: 10px;
-          }
+                .copy-app-name-button {
+                  display: inline-block;
+                  padding: 5px 10px;
+                  font-size: 14px;
+                  background-color: #2196f3;
+                  color: #fff;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  text-align: center;
+                  text-decoration: none;
+                  margin-top: 10px;
+                }
 
-          .app-name-container {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-          }
+                .app-name-container {
+                  display: flex;
+                  flex-direction: column;
+                  align-items: center;
+                }
 
-          .download-button {
-            display: block;
-            width: 200px;
-            padding: 10px;
-            font-size: 16px;
-            background-color: #4caf50;
-            color: #fff;
-            border: none;
-            border-radius: 4px;
-            cursor: pointer;
-            text-align: center;
-            text-decoration: none;
-            margin: 20px auto;
-          }
+                .download-button {
+                  display: block;
+                  width: 200px;
+                  padding: 10px;
+                  font-size: 16px;
+                  background-color: #4caf50;
+                  color: #fff;
+                  border: none;
+                  border-radius: 4px;
+                  cursor: pointer;
+                  text-align: center;
+                  text-decoration: none;
+                  margin: 20px auto;
+                }
 
-          .toast {
-          position: fixed;
-          bottom: 20px;
-          left: 50%;
-          transform: translateX(-50%);
-          background-color: #333;
-          color: #fff;
-          padding: 10px 20px;
-          border-radius: 4px;
-          opacity: 0;
-          transition: opacity 0.3s ease-in-out;
-        }
+                .toast {
+                position: fixed;
+                bottom: 20px;
+                left: 50%;
+                transform: translateX(-50%);
+                background-color: #333;
+                color: #fff;
+                padding: 10px 20px;
+                border-radius: 4px;
+                opacity: 0;
+                transition: opacity 0.3s ease-in-out;
+              }
 
-        .toast.show {
-          opacity: 1;
-        }
+              .toast.show {
+                opacity: 1;
+              }
 
-        .logo-buttons {
+              .app-logo {
+                max-width: 100px;
+                max-height: 100px;
+                margin-top: 10px;
+              }
+
+              .logo-buttons {
           display: flex;
           justify-content: center;
           margin-top: 10px;
       }
 
-        .app-logo {
-          max-width: 100px;
-          max-height: 100px;
-          margin-top: 10px;
-        }
+              .download-logo-button {
+                display: inline-block;
+                padding: 5px 10px;
+                font-size: 14px;
+                background-color: #4CAF50;
+                color: #fff;
+                border: none;
+                border-radius: 4px;
+                cursor: pointer;
+                text-align: center;
+                text-decoration: none;
+                margin-left: 10px;
+              }
 
-        .download-logo-button {
-          display: inline-block;
-          padding: 5px 10px;
-          font-size: 14px;
-          background-color: #4CAF50;
-          color: #fff;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          text-align: center;
-          text-decoration: none;
-          margin-left: 10px;
-        }
-
-        .download-logo-button,
-      .copy-logo-url-button {
-          display: inline-block;
-          padding: 5px 10px;
-          font-size: 14px;
-          background-color: #4CAF50;
-          color: #fff;
-          border: none;
-          border-radius: 4px;
-          cursor: pointer;
-          text-align: center;
-          text-decoration: none;
-          margin: 0 5px;
-      }
-
+              .download-logo-button,
         .copy-logo-url-button {
-              background-color: #8F90FE;
+            display: inline-block;
+            padding: 5px 10px;
+            font-size: 14px;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+            text-align: center;
+            text-decoration: none;
+            margin: 0 5px;
+        }
+
+            .download-logo-button {
+              background-color: #4CAF50;
           }
+
+            .copy-logo-url-button {
+                    background-color: #8F90FE;
+                }
     </style>
   </head>
   <body>
@@ -355,22 +358,24 @@
           Copy App Name
         </button>
         <img id="appLogo" class="app-logo" style="display: none;" />
-        <button
-          class="copy-logo-url-button"
-          id="copyLogoUrlButton"
-          style="display: none;"
-          onclick="copyLogoUrl()"
-        >
-          Copy Logo URL
-        </button>
-        <a
-          href="#"
-          class="download-logo-button"
-          id="downloadLogoButton"
-          style="display: none;"
-          download
-          >Download Logo</a
-        >
+        <div class="logo-buttons" style="display: none;">
+          <button
+            class="copy-logo-url-button"
+            id="copyLogoUrlButton"
+            style="display: none;"
+            onclick="copyLogoUrl()"
+          >
+            Copy Logo URL
+          </button>
+          <a
+            href="#"
+            class="download-logo-button"
+            id="downloadLogoButton"
+            style="display: none;"
+            download
+            >Download Logo</a
+          >
+        </div>
       </div>
       <button
         class="copy-button"
